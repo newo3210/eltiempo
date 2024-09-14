@@ -1,0 +1,98 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<link rel="stylesheet" href="css/layout.css">
+<link href="https://fonts.googleapis.com/css?family=Inconsolata" rel="stylesheet">
+<link rel="shortcut icon" type="image/png" href="http://brokenenglish.lol/brknfiles/brkn.ico">
+<title>emotional machine</title>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-9268681-17"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-9268681-17');
+</script>
+	</head>
+	<body>
+	    <!-- Pull down (start) -->
+<div class="pulldown-content">
+ <div>
+  <input type='button' id='pulldown' value='Pull down to Refresh'>
+ </div>
+</div>
+<!-- Pull down (end) -->
+<br><br>
+<input type="button" value="Reload Page" onClick="history.go(0)">
+	
+
+		<div id="container">
+
+			<div id="content">
+
+				<div id="output">
+				</div>
+
+			</div>
+		</div>
+		<script src="js/vendor/jquery-1.11.2.min.js"></script>
+		<script src="js/tracery.min.js"></script>
+		<script src="js/grammars.js"></script>
+		<script src="js/app.js"></script>
+		<script>var height = 0; var previousY = 0;
+	$(document).ready(function(){
+
+	 $("#pulldown").mousedown(function(e){
+
+	  height = 0;
+	  previousY = 0;
+
+	  $(document).on('mousemove',function(e){
+	   var mouseButton = e.which;
+
+	   if(previousY == 0){
+	    previousY = e.pageY;
+	   }
+
+	   var Y = e.pageY;
+
+	   // When Mouse Right button pressed
+	   if(mouseButton == 1){
+
+	    // Check mouse movement up or down
+	    if( Y < previousY ){
+	     height -= 1;
+	    }else{
+	     height += 1;
+	    }
+	    previousY = e.pageY;
+
+	    // Set height
+	    $('.pulldown-content').css('height',height+"px");
+
+	   }
+
+	   if(height > 150){
+	    location.reload();
+	   }
+
+	  });
+
+	 });
+
+	 // Remove mouse move Event and set height of .pulldown-content
+	 $(document).on('mouseleave mouseup',function(){
+
+	  if(height > 20){
+	   location.reload();
+	  }
+	  $(document).off('mousemove');
+	  $('.pulldown-content').css('height',"0px");
+	 });
+	});
+	</script>
+	</body>
+</html>
